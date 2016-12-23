@@ -1,9 +1,8 @@
 package flowexecutor.model;
 
-import java.util.LinkedList;
+import flowexecutor.exception.FlowStackFullException;
+
 import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by 212455787 on 12/23/2016.
@@ -26,7 +25,10 @@ public class FlowStack<T> {
         return stack.pop();
     }
 
-    public void push(T element) {
+    public void push(T element) throws FlowStackFullException {
+        if(this.stack.size()==maxStackSize)
+            throw new FlowStackFullException();
+
         stack.push(element);
     }
 

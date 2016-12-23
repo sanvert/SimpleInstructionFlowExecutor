@@ -1,9 +1,9 @@
 package flowexecutor;
 
+import flowexecutor.exception.FlowStackFullException;
+import flowexecutor.model.FlowStack;
 import org.junit.Before;
 import org.junit.Test;
-
-import flowexecutor.model.FlowStack;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,23 +12,26 @@ import static org.junit.Assert.assertEquals;
  */
 public class FlowStackOperationsTest {
     FlowStack<Integer> flowStack;
+    FlowStack<Integer> limitedStack;
 
     @Before
     public void setUp() {
+
         flowStack = new FlowStack<Integer>();
+        limitedStack = new FlowStack<Integer>(1);
     }
 
     @Test
-    public void shouldPushIntoFlowStack() {
+    public void shouldPushIntoFlowStack() throws FlowStackFullException {
         Integer element = new Integer(1999);
         flowStack.push(element);
         assertEquals(element, flowStack.pop());
     }
 
-    @Test(expected=IndexOutOfBoundsException.class)
-    public void shouldRaiseExceptionWhenStackIsFull() {
+    @Test(expected=FlowStackFullException.class)
+    public void shouldRaiseExceptionWhenStackIsFull() throws FlowStackFullException {
         Integer element = new Integer(1999);
-        flowStack.push(element);
-        assertEquals(element, flowStack.pop());
+        limitedStack.push(element);
+        limitedStack.push(element);
     }
 }
