@@ -21,8 +21,15 @@ public class FlowIntegerCommandsTest {
         stack = new FlowStack<Integer>();
     }
 
+    private void refreshStack() throws FlowStackEmptyException {
+        if(stack != null)
+            while(stack.getCurrentStackSize() > 0)
+                stack.pop();
+    }
+
     @Test
     public void shouldContainResultOfAddition() throws FlowStackFullException, FlowStackEmptyException {
+        refreshStack();
         stack.push(1);
         stack.push(2);
         IntegerAddCommand addCommand = new IntegerAddCommand();
