@@ -22,15 +22,17 @@ public class FlowIntegerCommandsTest {
         stack = new FlowStack<Integer>();
     }
 
-    private void refreshStack() throws FlowStackEmptyException {
-        if(stack != null)
-            while(stack.getCurrentStackSize() > 0)
+    private void refreshStack(FlowStack<Integer> stack) throws FlowStackEmptyException {
+        if(stack != null) {
+            while (stack.getCurrentStackSize() > 0) {
                 stack.pop();
+            }
+        }
     }
 
     @Test
     public void shouldContainResultOfAddition() throws FlowStackFullException, FlowStackEmptyException {
-        refreshStack();
+        refreshStack(stack);
         stack.push(1);
         stack.push(2);
         new IntegerAddCommand().execute(stack);
@@ -39,9 +41,9 @@ public class FlowIntegerCommandsTest {
 
     @Test
     public void shouldContainResultOfSubtraction() throws FlowStackFullException, FlowStackEmptyException {
-        refreshStack();
-        stack.push(3);
+        refreshStack(stack);
         stack.push(1);
+        stack.push(3);
         new IntegerSubtractCommand().execute(stack);
         assertEquals(2, (int)stack.pop());
     }

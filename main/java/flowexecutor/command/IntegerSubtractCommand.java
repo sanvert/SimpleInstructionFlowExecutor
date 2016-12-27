@@ -1,5 +1,7 @@
 package flowexecutor.command;
 
+import flowexecutor.exception.FlowStackEmptyException;
+import flowexecutor.exception.FlowStackFullException;
 import flowexecutor.model.FlowStack;
 
 /**
@@ -7,7 +9,9 @@ import flowexecutor.model.FlowStack;
  */
 public class IntegerSubtractCommand implements Command {
     @Override
-    public void execute(FlowStack flowStack) throws Exception {
-
+    public void execute(FlowStack flowStack) throws FlowStackEmptyException, FlowStackFullException {
+        int second = (int)flowStack.pop();
+        int first = (int)flowStack.pop();
+        flowStack.push(first-second);
     }
 }
