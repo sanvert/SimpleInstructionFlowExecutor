@@ -1,5 +1,6 @@
 package flowexecutor;
 
+import flowexecutor.exception.FlowStackEmptyException;
 import flowexecutor.exception.FlowStackFullException;
 import flowexecutor.model.FlowStack;
 import org.junit.Before;
@@ -13,16 +14,16 @@ import static org.junit.Assert.assertEquals;
 public class FlowStackOperationsTest {
     FlowStack<Integer> flowStack;
     FlowStack<Integer> limitedStack;
-
+    FlowStack<Integer> emptyStack;
     @Before
     public void setUp() {
-
         flowStack = new FlowStack<Integer>();
         limitedStack = new FlowStack<Integer>(1);
+        emptyStack = new FlowStack<Integer>();
     }
 
     @Test
-    public void shouldPushIntoFlowStack() throws FlowStackFullException {
+    public void shouldPushIntoFlowStack() throws FlowStackFullException, FlowStackEmptyException {
         Integer element = new Integer(1999);
         flowStack.push(element);
         assertEquals(element, flowStack.pop());
@@ -33,5 +34,10 @@ public class FlowStackOperationsTest {
         Integer element = new Integer(1999);
         limitedStack.push(element);
         limitedStack.push(element);
+    }
+
+    @Test(expected=FlowStackEmptyException.class)
+    public void shouldRaiseExceptionWhenStackIsEmpty() throws FlowStackEmptyException {
+        emptyStack.pop();
     }
 }

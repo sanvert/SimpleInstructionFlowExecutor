@@ -1,5 +1,6 @@
 package flowexecutor.model;
 
+import flowexecutor.exception.FlowStackEmptyException;
 import flowexecutor.exception.FlowStackFullException;
 
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -21,7 +22,9 @@ public class FlowStack<T> {
         this.maxStackSize = maxStackSize;
     }
 
-    public T pop() {
+    public T pop() throws FlowStackEmptyException {
+        if(this.stack.size()==0)
+            throw new FlowStackEmptyException();
         return stack.pop();
     }
 
