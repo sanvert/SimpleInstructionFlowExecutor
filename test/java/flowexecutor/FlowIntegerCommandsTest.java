@@ -1,6 +1,7 @@
 package flowexecutor;
 
 import flowexecutor.command.IntegerAddCommand;
+import flowexecutor.command.IntegerSubtractCommand;
 import flowexecutor.exception.FlowStackEmptyException;
 import flowexecutor.exception.FlowStackFullException;
 import flowexecutor.model.FlowStack;
@@ -32,8 +33,16 @@ public class FlowIntegerCommandsTest {
         refreshStack();
         stack.push(1);
         stack.push(2);
-        IntegerAddCommand addCommand = new IntegerAddCommand();
-        addCommand.execute(stack);
+        new IntegerAddCommand().execute(stack);
         assertEquals(3, (int)stack.pop());
+    }
+
+    @Test
+    public void shouldContainResultOfSubtraction() throws FlowStackFullException, FlowStackEmptyException {
+        refreshStack();
+        stack.push(3);
+        stack.push(1);
+        new IntegerSubtractCommand().execute(stack);
+        assertEquals(2, (int)stack.pop());
     }
 }
