@@ -42,8 +42,8 @@ public class FlowIntegerCommandsTest {
     @Test
     public void shouldContainResultOfSubtraction() throws FlowStackFullException, FlowStackEmptyException {
         refreshStack(stack);
-        stack.push(1);
         stack.push(3);
+        stack.push(1);
         new IntegerSubtractCommand().execute(stack);
         assertEquals(2, (int)stack.pop());
     }
