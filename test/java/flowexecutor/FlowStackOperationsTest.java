@@ -15,6 +15,7 @@ public class FlowStackOperationsTest {
     FlowStack<Integer> flowStack;
     FlowStack<Integer> limitedStack;
     FlowStack<Integer> emptyStack;
+
     @Before
     public void setUp() {
         flowStack = new FlowStack<Integer>();
