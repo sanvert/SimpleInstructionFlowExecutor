@@ -1,12 +1,12 @@
 package flowexecutor;
 
 import flowexecutor.command.IntegerAddCommand;
+import flowexecutor.command.IntegerDivideCommand;
 import flowexecutor.command.IntegerMultiplyCommand;
 import flowexecutor.command.IntegerSubtractCommand;
 import flowexecutor.exception.FlowStackEmptyException;
 import flowexecutor.exception.FlowStackFullException;
 import flowexecutor.model.FlowStack;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -46,6 +46,14 @@ public class FlowIntegerCommandsTest {
         stack.push(2);
         new IntegerMultiplyCommand().execute(stack);
         assertEquals(6, (int)stack.pop());
+    }
+
+    @Test
+    public void shouldContainResultOfDivision() throws FlowStackFullException, FlowStackEmptyException {
+        stack.push(4);
+        stack.push(2);
+        new IntegerDivideCommand().execute(stack);
+        assertEquals(2, (int)stack.pop());
     }
 
 }
