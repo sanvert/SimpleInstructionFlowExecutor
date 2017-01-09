@@ -9,7 +9,7 @@ import flowexecutor.model.FlowStack;
  */
 public class IntegerAddCommand implements Command {
     @Override
-    public void execute(FlowStack flowStack) throws FlowStackEmptyException, FlowStackFullException {
+    public void execute(FlowStack flowStack, Object[] parameters) throws FlowStackEmptyException, FlowStackFullException {
         flowStack.push((int)flowStack.pop() + (int)flowStack.pop());
     }
 }

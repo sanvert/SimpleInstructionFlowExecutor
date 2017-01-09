@@ -1,9 +1,6 @@
 package flowexecutor;
 
-import flowexecutor.command.IntegerAddCommand;
-import flowexecutor.command.IntegerDivideCommand;
-import flowexecutor.command.IntegerMultiplyCommand;
-import flowexecutor.command.IntegerSubtractCommand;
+import flowexecutor.command.*;
 import flowexecutor.exception.FlowStackEmptyException;
 import flowexecutor.exception.FlowStackFullException;
 import flowexecutor.model.FlowStack;
@@ -15,6 +12,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by 212455787 on 12/27/2016.
  */
+//@RunWith(MockitoJUnitRunner.class)
 public class FlowIntegerCommandsTest {
 
     FlowStack<Integer> stack;
@@ -28,7 +26,7 @@ public class FlowIntegerCommandsTest {
     public void shouldContainResultOfAddition() throws FlowStackFullException, FlowStackEmptyException {
         stack.push(1);
         stack.push(2);
-        new IntegerAddCommand().execute(stack);
+        new IntegerAddCommand().execute(stack, null);
         assertEquals(3, (int)stack.pop());
     }
 
@@ -36,7 +34,7 @@ public class FlowIntegerCommandsTest {
     public void shouldContainResultOfSubtraction() throws FlowStackFullException, FlowStackEmptyException {
         stack.push(3);
         stack.push(1);
-        new IntegerSubtractCommand().execute(stack);
+        new IntegerSubtractCommand().execute(stack, null);
         assertEquals(2, (int)stack.pop());
     }
 
@@ -44,7 +42,7 @@ public class FlowIntegerCommandsTest {
     public void shouldContainResultOfMultiplication() throws FlowStackFullException, FlowStackEmptyException {
         stack.push(3);
         stack.push(2);
-        new IntegerMultiplyCommand().execute(stack);
+        new IntegerMultiplyCommand().execute(stack, null);
         assertEquals(6, (int)stack.pop());
     }
 
@@ -52,8 +50,14 @@ public class FlowIntegerCommandsTest {
     public void shouldContainResultOfDivision() throws FlowStackFullException, FlowStackEmptyException {
         stack.push(4);
         stack.push(2);
-        new IntegerDivideCommand().execute(stack);
+        new IntegerDivideCommand().execute(stack, null);
         assertEquals(2, (int)stack.pop());
+    }
+
+    @Test
+    public void shouldContainResultOfPush() throws FlowStackFullException, FlowStackEmptyException {
+        new IntegerPushCommand().execute(stack, new Integer[]{1});
+        assertEquals(1, (int)stack.pop());
     }
 
 }
