@@ -12,7 +12,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by 212455787 on 12/27/2016.
  */
-//@RunWith(MockitoJUnitRunner.class)
 public class FlowIntegerCommandsTest {
 
     FlowStack<Integer> stack;
